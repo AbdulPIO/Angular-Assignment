@@ -1,0 +1,116 @@
+<div class="form-container">
+  <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+    <div class="card">
+      <h2>{{ isEditMode ? "Edit Exam" : "Create Exam" }}</h2>
+
+      <div class="form-group">
+        <label for="examName">Exam Name</label>
+        <input
+          id="examName"
+          type="text"
+          formControlName="examName"
+          [class.invalid]="submitted && examForm.get('examName')?.errors"
+        />
+        <div
+          class="error-message"
+          *ngIf="submitted && examForm.get('examName')?.errors?.['required']"
+        >
+          Exam name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="examKey">Exam Key</label>
+        <input
+          id="examKey"
+          type="text"
+          formControlName="examKey"
+          [class.invalid]="submitted && examForm.get('examKey')?.errors"
+        />
+        <div
+          class="error-message"
+          *ngIf="submitted && examForm.get('examKey')?.errors?.['required']"
+        >
+          Exam key is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          id="phone"
+          type="text"
+          formControlName="phone"
+          placeholder="123-456-7890"
+          [class.invalid]="submitted && examForm.get('phone')?.errors"
+        />
+        <div
+          class="error-message"
+          *ngIf="submitted && examForm.get('phone')?.errors?.['pattern']"
+        >
+          Phone must be in format: 123-456-7890
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="examHours">Exam Hours</label>
+        <input
+          id="examHours"
+          type="number"
+          formControlName="examHours"
+          [class.invalid]="submitted && examForm.get('examHours')?.errors"
+        />
+        <div
+          class="error-message"
+          *ngIf="submitted && examForm.get('examHours')?.errors?.['min']"
+        >
+          Exam hours must be at least 1
+        </div>
+      </div>
+
+      <div class="exam-details" formArrayName="examDetails">
+        <div class="details-header">
+          <h3>Exam Details</h3>
+          <button type="button" class="btn secondary" (click)="addExamDetail()">
+            Add Subject
+          </button>
+        </div>
+
+        <div
+          *ngFor="let detail of examDetails.controls; let i = index"
+          [formGroupName]="i"
+          class="detail-row"
+        >
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" formControlName="subject" />
+          </div>
+
+          <div class="form-group">
+            <label>Marks</label>
+            <input type="number" formControlName="marks" />
+          </div>
+
+          <div class="form-group">
+            <label>Questions</label>
+            <input type="number" formControlName="no_of_questions" />
+          </div>
+
+          <button
+            type="button"
+            class="btn danger"
+            (click)="removeExamDetail(i)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">
+          {{ isEditMode ? "Update" : "Save" }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

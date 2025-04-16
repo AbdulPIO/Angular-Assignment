@@ -1,0 +1,15 @@
+<header class="header">
+  <div class="logo">
+    <img src="logo.svg" alt="Logo" />
+  </div>
+
+  <nav class="nav-buttons">
+    <button class="btn primary" *ngIf="!isFormRoute" (click)="onAdd()">
+      Add
+    </button>
+    <ng-container *ngIf="isFormRoute">
+      <button class="btn primary" (click)="onUpdate()">Update</button>
+      <button class="btn secondary" (click)="onBack()">Back</button>
+    </ng-container>
+  </nav>
+</header>

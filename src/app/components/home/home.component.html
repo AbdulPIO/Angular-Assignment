@@ -1,0 +1,53 @@
+<div class="home-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Exam List</h2>
+      <div class="search-box">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (keyup)="applyFilter()"
+          placeholder="Search exams..."
+          class="search-input"
+        />
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Exam Name</th>
+            <th>Exam Key</th>
+            <th>Phone</th>
+            <th>Hours</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of filteredExams">
+            <td>{{ exam.examName }}</td>
+            <td>{{ exam.examKey }}</td>
+            <td>{{ exam.phone }}</td>
+            <td>{{ exam.examHours }}</td>
+            <td class="actions">
+              <button
+                type="button"
+                class="btn secondary"
+                (click)="onEdit(exam)"
+              >
+                Edit
+              </button>
+              <button type="button" class="btn danger" (click)="onDelete(exam)">
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="filteredExams.length === 0">
+            <td colspan="5" class="no-data">No exams found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

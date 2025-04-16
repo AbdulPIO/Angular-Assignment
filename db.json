@@ -1,0 +1,63 @@
+{
+  "exams": [
+    {
+      "id": "1744693071906",
+      "examName": "Economics1",
+      "examKey": "Eco1234",
+      "phone": "876-345-8762",
+      "examHours": 2,
+      "examDetails": []
+    },
+    {
+      "id": "1744695093013",
+      "examName": "Hindi",
+      "examKey": "Hin123",
+      "phone": "967-397-3847",
+      "examHours": 3,
+      "examDetails": []
+    },
+    {
+      "id": "1744695131745",
+      "examName": "Math",
+      "examKey": "Math123",
+      "phone": "123-456-7890",
+      "examHours": 2,
+      "examDetails": []
+    },
+    {
+      "id": "1744696982851",
+      "examName": "German",
+      "examKey": "Ger123",
+      "phone": "897-455-3543",
+      "examHours": 2,
+      "examDetails": []
+    },
+    {
+      "id": "1744697149177",
+      "examName": "Politics",
+      "examKey": "Pol123",
+      "phone": "213-123-4333",
+      "examHours": 1,
+      "examDetails": []
+    },
+    {
+      "id": "1744698285918",
+      "examName": "Reasoning",
+      "examKey": "Rea123",
+      "phone": "834-234-8734",
+      "examHours": 3,
+      "examDetails": [
+        {
+          "subject": "Aptitude",
+          "marks": 2,
+          "no_of_questions": 10
+        },
+        {
+          "subject": "Relation",
+          "marks": 3,
+          "no_of_questions": 10
+        }
+      ]
+    }
+  ]
+}
