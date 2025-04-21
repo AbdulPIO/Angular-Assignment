@@ -70,10 +70,7 @@
               "buildTarget": "angular-assignment-app:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "proxyConfig": "Angular/Angular-18/angular-assignment-app/proxy.conf.json"
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
