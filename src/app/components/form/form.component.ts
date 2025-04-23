@@ -32,6 +32,22 @@ export class FormComponent implements OnInit {
         this.loadExamData();
       }
     });
+
+    // watching for form status and dirty changes to manage save and update buttons
+    this.examForm.statusChanges.subscribe(() => this.emitFormState())
+    this.examForm.valueChanges.subscribe(() => this.emitFormState())
+  }
+
+  // function to emit form state - listen in HeaderComponent
+  emitFormState() {
+    const event = new CustomEvent('formStateUpdate', {
+      detail: {
+        isValid: this.examForm.valid,
+        isDirty: this.examForm.dirty
+      },
+      bubbles: true
+    });
+    window.dispatchEvent(event);
   }
 
   private createFormGroup(): FormGroup {
@@ -65,9 +81,39 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    // if (this.examForm.valid) {
+    //   const examData = this.examForm.value;
+
+    // Adding functionality that at least one subject is required
+    if (this.examDetails.length === 0) {
+      alert('Please add at least one subject before submitting the exam.');
+      return;
+    }
+
+    // Feature that no new subject with same name and marks can be added
+    const duplicates = new Set<string>();
+    let hasDuplicate = false;
+
+    for (let detail of this.examDetails.controls) {
+      const subject = detail.get('subject')?.value?.trim().toLowerCase();
+      const markss = detail.get('marks')?.value;
+
+      const key = `${subject}-${markss}`;
+
+      if (duplicates.has(key)) {
+        hasDuplicate = true;
+        break;
+      }
+      duplicates.add(key);
+    }
+
+    if (hasDuplicate) {
+      alert('Duplicate subjects with the same name and marks are not allowed.');
+      return;
+    }
+
     if (this.examForm.valid) {
       const examData = this.examForm.value;
-
 
       if (this.isEditMode) {
         examData.id = this.examId;

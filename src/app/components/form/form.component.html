@@ -57,6 +57,7 @@
         <input
           id="examHours"
           type="number"
+          min="1"
           formControlName="examHours"
           [class.invalid]="submitted && examForm.get('examHours')?.errors"
         />
@@ -84,16 +85,37 @@
           <div class="form-group">
             <label>Subject</label>
             <input type="text" formControlName="subject" />
+            <!-- Validation for atleast one subject -->
+            <div
+              class="error-message"
+              *ngIf="submitted && detail.get('subject')?.errors?.['required']"
+            >
+              Subject is required!
+            </div>
           </div>
 
           <div class="form-group">
             <label>Marks</label>
-            <input type="number" formControlName="marks" />
+            <input type="number" formControlName="marks" min="0" />
+            <!-- Validation for no negative marks -->
+            <div
+              class="error-message"
+              *ngIf="submitted && detail.get('marks')?.errors?.['min']"
+            >
+              Marks cannot be negative!
+            </div>
           </div>
 
           <div class="form-group">
             <label>Questions</label>
-            <input type="number" formControlName="no_of_questions" />
+            <input type="number" formControlName="no_of_questions" min="1" />
+            <!-- Validation for minimum 1 question -->
+            <div
+              class="error-message"
+              *ngIf="submitted && detail.get('no_of_questions')?.errors?.['min']"
+            >
+              Number of questions must be at least 1!
+            </div>
           </div>
 
           <button
@@ -106,8 +128,13 @@
         </div>
       </div>
 
+      <!-- added daible in button and enabling only if valid -->
       <div class="form-actions">
-        <button type="submit" class="btn primary">
+        <button
+          type="submit"
+          class="btn primary"
+          [disabled]="!examForm.valid || !examForm.dirty"
+        >
           {{ isEditMode ? "Update" : "Save" }}
         </button>
       </div>

@@ -15,6 +15,10 @@ export class HeaderComponent {
   isFormRoute = false;
   currentExamId: number | null = null;
 
+  // Button validation variables
+  formValid = false;
+  formDirty = false;
+
   constructor(
     private router: Router,
     private examService: ExamService
@@ -27,6 +31,12 @@ export class HeaderComponent {
       const urlParts = this.router.url.split('/');
       this.currentExamId = urlParts.length > 2 ? +urlParts[2] : null;
     });
+
+    // Listening to form state updates
+    window.addEventListener('formStateUpdate', (e: any) => {
+      this.formValid = e.detail.isValid;
+      this.formDirty = e.detail.isDirty;
+    })
   }
 
   onAdd() {
