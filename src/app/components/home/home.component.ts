@@ -22,10 +22,16 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) { }
 
+  /**
+   * Initializes component and loads exams.
+   */
   ngOnInit() {
     this.loadExams();
   }
 
+  /**
+   * Loads all exams from API
+   */
   loadExams() {
     this.examService.getAllExams().subscribe({
       next: (data: Exam[]) => {
@@ -38,6 +44,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Applies text-based filter to exams list.
+   */
   applyFilter() {
     const search = this.searchTerm.toLowerCase();
     this.filteredExams = this.exams.filter(exam =>
@@ -46,6 +55,10 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  /**
+   * Navigates to edit form for given exam.
+   * @param exam The selected exam to edit
+   */
   onEdit(exam: Exam) {
     if (exam?.id !== undefined && exam.id !== null) {
       this.router.navigate(['/form', exam.id]);
@@ -54,6 +67,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * Deletes an exam after confirmation
+   * @param exam The exam to delete
+   */
   onDelete(exam: Exam) {
     console.log("delete triggered");
 

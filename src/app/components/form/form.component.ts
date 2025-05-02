@@ -24,6 +24,9 @@ export class FormComponent implements OnInit {
     private router: Router
   ) { }
 
+  /**
+   * Initializes the form and loads existing data if in edit mode.
+   */
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -38,7 +41,9 @@ export class FormComponent implements OnInit {
     this.examForm.valueChanges.subscribe(() => this.emitFormState())
   }
 
-  // function to emit form state - listen in HeaderComponent
+  /**
+   * Emits Form validity and dirtiness state to other components
+   */
   emitFormState() {
     const event = new CustomEvent('formStateUpdate', {
       detail: {
@@ -50,6 +55,9 @@ export class FormComponent implements OnInit {
     window.dispatchEvent(event);
   }
 
+  /**
+   * Initializes the form with controls and validators.
+   */
   private createFormGroup(): FormGroup {
     return this.fb.group({
       id: [generateUniqueId()],
@@ -62,10 +70,16 @@ export class FormComponent implements OnInit {
     });
   }
 
+  /**
+   * @returns {FormArray} The examDetails FormArray
+   */
   get examDetails() {
     return this.examForm.get('examDetails') as FormArray;
   }
 
+  /**
+   * Adds a subject row to the form.
+   */
   addExamDetail() {
     const detail = this.fb.group({
       subject: ['', Validators.required],
@@ -75,10 +89,17 @@ export class FormComponent implements OnInit {
     this.examDetails.push(detail);
   }
 
+  /**
+   * Removes a subject row.
+   * @param index Index of the row to remove
+   */
   removeExamDetail(index: number) {
     this.examDetails.removeAt(index);
   }
 
+  /**
+   * Handles form submission with duplicate subject check.
+   */
   onSubmit() {
     this.submitted = true;
     // if (this.examForm.valid) {
@@ -144,6 +165,9 @@ export class FormComponent implements OnInit {
     }
   }
 
+  /**
+   * Populates Form with existing eam data in edit mode.
+   */
   private loadExamData() {
     if (this.examId) {
       this.examService.getExamById(this.examId).subscribe({
@@ -188,7 +212,10 @@ export class FormComponent implements OnInit {
   }
 }
 
-// helper function
+/**
+ * Helper function to create unique id for different exams
+ * @return unique string value
+ */
 function generateUniqueId(): string {
   const timestamp = Date.now();
   const randomNum = Math.floor(Math.random() * 1000);
