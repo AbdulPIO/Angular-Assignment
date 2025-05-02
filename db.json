@@ -2,11 +2,17 @@
   "exams": [
     {
       "id": "1744693071906",
-      "examName": "Economics1",
+      "examName": "Economics",
       "examKey": "Eco1234",
       "phone": "876-345-8762",
       "examHours": 2,
-      "examDetails": []
+      "examDetails": [
+        {
+          "subject": "basics",
+          "marks": 5,
+          "no_of_questions": 5
+        }
+      ]
     },
     {
       "id": "1744695093013",
@@ -33,14 +39,6 @@
       "examDetails": []
     },
     {
-      "id": "1744697149177",
-      "examName": "Politics",
-      "examKey": "Pol123",
-      "phone": "213-123-4333",
-      "examHours": 1,
-      "examDetails": []
-    },
-    {
       "id": "1744698285918",
       "examName": "Reasoning",
       "examKey": "Rea1234",
@@ -56,6 +54,20 @@
           "subject": "Relation",
           "marks": 3,
           "no_of_questions": 10
+        }
+      ]
+    },
+    {
+      "id": "1746097588391",
+      "examName": "Roman ",
+      "examKey": "Rom123",
+      "phone": "234-234-2343",
+      "examHours": 3,
+      "examDetails": [
+        {
+          "subject": "basics",
+          "marks": 5,
+          "no_of_questions": 5
         }
       ]
     }
