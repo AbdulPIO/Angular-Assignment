@@ -51,6 +51,19 @@
       &:hover { background-color: darken(#dc3545, 10%); }
     }
   }
+
+// adding styles for disabled buttons
+// button.btn[disabled] {
+//   opacity: 0.6;
+//   cursor: not-allowed;
+//   pointer-events: none;
+// }
+
+button.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
   
   /* Form styles */
   .form-group {
