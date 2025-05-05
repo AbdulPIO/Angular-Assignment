@@ -8,7 +8,13 @@
       Add
     </button>
     <ng-container *ngIf="isFormRoute">
-      <button class="btn primary" (click)="onUpdate()">Update</button>
+      <button
+        class="btn primary"
+        (click)="onUpdate()"
+        [disabled]="!formValid || !formDirty"
+      >
+        {{ currentExamId ? "Update" : "Save" }}
+      </button>
       <button class="btn secondary" (click)="onBack()">Back</button>
     </ng-container>
   </nav>

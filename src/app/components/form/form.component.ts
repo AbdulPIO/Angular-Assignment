@@ -24,6 +24,9 @@ export class FormComponent implements OnInit {
     private router: Router
   ) { }
 
+  /**
+   * Initializes the form and loads existing data if in edit mode.
+   */
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -32,8 +35,29 @@ export class FormComponent implements OnInit {
         this.loadExamData();
       }
     });
+
+    // watching for form status and dirty changes to manage save and update buttons
+    this.examForm.statusChanges.subscribe(() => this.emitFormState())
+    this.examForm.valueChanges.subscribe(() => this.emitFormState())
   }
 
+  /**
+   * Emits Form validity and dirtiness state to other components
+   */
+  emitFormState() {
+    const event = new CustomEvent('formStateUpdate', {
+      detail: {
+        isValid: this.examForm.valid,
+        isDirty: this.examForm.dirty
+      },
+      bubbles: true
+    });
+    window.dispatchEvent(event);
+  }
+
+  /**
+   * Initializes the form with controls and validators.
+   */
   private createFormGroup(): FormGroup {
     return this.fb.group({
       id: [generateUniqueId()],
@@ -46,10 +70,16 @@ export class FormComponent implements OnInit {
     });
   }
 
+  /**
+   * @returns {FormArray} The examDetails FormArray
+   */
   get examDetails() {
     return this.examForm.get('examDetails') as FormArray;
   }
 
+  /**
+   * Adds a subject row to the form.
+   */
   addExamDetail() {
     const detail = this.fb.group({
       subject: ['', Validators.required],
@@ -59,15 +89,52 @@ export class FormComponent implements OnInit {
     this.examDetails.push(detail);
   }
 
+  /**
+   * Removes a subject row.
+   * @param index Index of the row to remove
+   */
   removeExamDetail(index: number) {
     this.examDetails.removeAt(index);
   }
 
+  /**
+   * Handles form submission with duplicate subject check.
+   */
   onSubmit() {
     this.submitted = true;
+    // if (this.examForm.valid) {
+    //   const examData = this.examForm.value;
+
+    // Adding functionality that at least one subject is required
+    if (this.examDetails.length === 0) {
+      alert('Please add at least one subject before submitting the exam.');
+      return;
+    }
+
+    // Feature that no new subject with same name and marks can be added
+    const duplicates = new Set<string>();
+    let hasDuplicate = false;
+
+    for (let detail of this.examDetails.controls) {
+      const subject = detail.get('subject')?.value?.trim().toLowerCase();
+      const markss = detail.get('marks')?.value;
+
+      const key = `${subject}-${markss}`;
+
+      if (duplicates.has(key)) {
+        hasDuplicate = true;
+        break;
+      }
+      duplicates.add(key);
+    }
+
+    if (hasDuplicate) {
+      alert('Duplicate subjects with the same name and marks are not allowed.');
+      return;
+    }
+
     if (this.examForm.valid) {
       const examData = this.examForm.value;
-
 
       if (this.isEditMode) {
         examData.id = this.examId;
@@ -98,6 +165,9 @@ export class FormComponent implements OnInit {
     }
   }
 
+  /**
+   * Populates Form with existing eam data in edit mode.
+   */
   private loadExamData() {
     if (this.examId) {
       this.examService.getExamById(this.examId).subscribe({
@@ -142,7 +212,10 @@ export class FormComponent implements OnInit {
   }
 }
 
-// helper function
+/**
+ * Helper function to create unique id for different exams
+ * @return unique string value
+ */
 function generateUniqueId(): string {
   const timestamp = Date.now();
   const randomNum = Math.floor(Math.random() * 1000);

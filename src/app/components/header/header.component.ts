@@ -15,6 +15,10 @@ export class HeaderComponent {
   isFormRoute = false;
   currentExamId: number | null = null;
 
+  // Button validation variables
+  formValid = false;
+  formDirty = false;
+
   constructor(
     private router: Router,
     private examService: ExamService
@@ -27,12 +31,26 @@ export class HeaderComponent {
       const urlParts = this.router.url.split('/');
       this.currentExamId = urlParts.length > 2 ? +urlParts[2] : null;
     });
+
+    /**
+     * Listens for custom form state update events from form component.
+     */
+    window.addEventListener('formStateUpdate', (e: any) => {
+      this.formValid = e.detail.isValid;
+      this.formDirty = e.detail.isDirty;
+    })
   }
 
+  /**
+   * Navigates to the add form page.
+   */
   onAdd() {
     this.router.navigate(['/form']);
   }
 
+  /**
+   * Dispatches a submit event to trigger form submission from the form component.
+   */
   onUpdate() {
     // This function will trigger form submission
     const formElement = document.querySelector('form');
@@ -45,6 +63,9 @@ export class HeaderComponent {
     }
   }
 
+  /**
+   * Deletes the current exam after confirmation.
+   */
   onDelete() {
     console.log("delete from header triggered");
 
@@ -64,6 +85,9 @@ export class HeaderComponent {
     }
   }
 
+  /**
+   * Navigates back to home with confirmation if form is dirty.
+   */
   onBack() {
     // Check if there are unsaved changes
     const hasUnsavedChanges = document.querySelector('form.ng-dirty');
