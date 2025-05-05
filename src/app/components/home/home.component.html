@@ -6,7 +6,7 @@
         <input
           type="text"
           [(ngModel)]="searchTerm"
-          (keyup)="applyFilter()"
+          (keyup)="applyFilterandPagination()"
           placeholder="Search exams..."
           class="search-input"
         />
@@ -17,7 +17,16 @@
       <table>
         <thead>
           <tr>
-            <th>Exam Name</th>
+            <th (click)="onSort('examName')">
+              Exam Name
+              {{
+                sortColumn === "examName"
+                  ? sortDirection === "asc"
+                    ? "▲"
+                    : "▼"
+                  : ""
+              }}
+            </th>
             <th>Exam Key</th>
             <th>Phone</th>
             <th>Hours</th>
@@ -48,6 +57,23 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">
+        Previous
+      </button>
+      <button
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1"
+        (click)="goToPage(i + 1)"
+      >
+        {{ i + 1 }}
+      </button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+        Next
+      </button>
     </div>
   </div>
 </div>
