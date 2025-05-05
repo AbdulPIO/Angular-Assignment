@@ -59,7 +59,7 @@
 //   pointer-events: none;
 // }
 
-button.btn:disabled {
+.btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
