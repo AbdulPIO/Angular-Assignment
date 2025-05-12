@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { ExamService } from '../../services/exam.service';
 import { Exam } from '../../models/exam';
 import { filter } from 'rxjs';
+import { PaginationComponent } from '../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, PaginationComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
@@ -55,6 +56,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Filters and paginates the sorted list of exams on search term.
+   * Always sorts the full dataset before filtering.
+   */
   applyFilterandPagination() {
     const search = this.searchTerm.toLowerCase();
     const filtered = this.exams.filter(exam =>
@@ -69,6 +74,15 @@ export class HomeComponent implements OnInit {
     const end = start + this.pageSize;
 
     this.filteredExams = filtered.slice(start, end);
+  }
+
+  /**
+   * Updates current page when page is changed from pagination component
+   * @param page The page number to navigate to
+   */
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.applyFilterandPagination();
   }
 
   /**
@@ -133,18 +147,28 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  goToPage(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.applyFilterandPagination();
-    }
-  }
+  // /**
+  //  * Sets the current page and refreshes the view.
+  //  * @param page The page number to navigate to
+  //  */
+  // goToPage(page: number) {
+  //   if (page >= 1 && page <= this.totalPages) {
+  //     this.currentPage = page;
+  //     this.applyFilterandPagination();
+  //   }
+  // }
 
-  nextPage() {
-    this.goToPage(this.currentPage + 1);
-  }
+  // /**
+  //  * Navigates to the next page if available.
+  //  */
+  // nextPage() {
+  //   this.goToPage(this.currentPage + 1);
+  // }
 
-  previousPage() {
-    this.goToPage(this.currentPage - 1);
-  }
+  // /**
+  //  * Navigates to the previous page if available
+  //  */
+  // previousPage() {
+  //   this.goToPage(this.currentPage - 1);
+  // }
 } 

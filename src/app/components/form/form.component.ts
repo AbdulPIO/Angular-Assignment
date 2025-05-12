@@ -13,9 +13,9 @@ import { ExamService } from '../../services/exam.service';
 })
 export class FormComponent implements OnInit {
   examForm: FormGroup = this.createFormGroup();
-  isEditMode = false;
+  isEditMode: boolean = false;
   examId: number | null = null;
-  submitted = false;
+  submitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
