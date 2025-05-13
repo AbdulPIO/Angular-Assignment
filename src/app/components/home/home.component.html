@@ -6,7 +6,7 @@
         <input
           type="text"
           [(ngModel)]="searchTerm"
-          (keyup)="applyFilter()"
+          (keyup)="applyFilterandPagination()"
           placeholder="Search exams..."
           class="search-input"
         />
@@ -17,7 +17,16 @@
       <table>
         <thead>
           <tr>
-            <th>Exam Name</th>
+            <th (click)="onSort('examName')">
+              Exam Name
+              {{
+                sortColumn === "examName"
+                  ? sortDirection === "asc"
+                    ? "▲"
+                    : "▼"
+                  : ""
+              }}
+            </th>
             <th>Exam Key</th>
             <th>Phone</th>
             <th>Hours</th>
@@ -49,5 +58,12 @@
         </tbody>
       </table>
     </div>
+
+    <!-- Reusable Pagination Component -->
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
   </div>
 </div>

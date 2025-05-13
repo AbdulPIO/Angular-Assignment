@@ -35,9 +35,10 @@ export class HeaderComponent {
     /**
      * Listens for custom form state update events from form component.
      */
-    window.addEventListener('formStateUpdate', (e: any) => {
-      this.formValid = e.detail.isValid;
-      this.formDirty = e.detail.isDirty;
+    window.addEventListener('formStateUpdate', (e: Event) => {
+      const customEvent = e as CustomEvent<{ isValid: boolean; isDirty: boolean }>;
+      this.formValid = customEvent.detail.isValid;
+      this.formDirty = customEvent.detail.isDirty;
     })
   }
 
