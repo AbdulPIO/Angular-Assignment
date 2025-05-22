@@ -1,15 +1,18 @@
 :root {
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --danger-color: #dc3545;
-  --success-color: #28a745;
-  --background-color: #f8f9fa;
-  --border-color: #dee2e6;
-  --text-color: #212529;
-  --error-color: #dc3545;
+  --primary-color: #5c6bc0;
+  --primary-hover: #3949ab;
+  --secondary-color: #ff7043;
+  --secondary-hover: #f4511e;
+  --success-color: #66bb6a;
+  --danger-color: #ef5350;
+  --background-color: #f4f6f8;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --error-color: #ef5350;
 }
-
-/* Reset and base styles */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -17,174 +20,292 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.5;
-  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Common button styles */
+/* --- Header --- */
+.header {
+  background: var(--card-bg);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+
+  .logo img {
+    height: 48px;
+    max-width: 100%;
+  }
+
+  .nav-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: var(--primary-hover);
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* --- Card style container for tables --- */
+.table-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px var(--shadow-color);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+/* --- Table --- */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Adds space between rows for card effect */
+  font-size: 1rem;
+  color: var(--text-color);
+  user-select: none;
+
+  th,
+  td {
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  th {
+    background-color: transparent;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+    position: relative;
+
+    span {
+      margin-left: 6px;
+      font-size: 0.8rem;
+      color: var(--secondary-color);
+    }
+  }
+
+  tbody tr {
+    background: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    transition: transform 0.15s ease;
+    margin-bottom: 10px;
+
+    &:hover {
+      transform: translateY(-3px);
+      background: #e3e8ff;
+      box-shadow: 0 8px 16px rgba(92, 107, 192, 0.3);
+    }
+  }
+
+  tbody td {
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    margin-bottom: 10px;
+  }
+}
+
+/* --- Form styles --- */
+.form-group {
+  margin-bottom: 1.2rem;
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--primary-color);
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.8px solid var(--border-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px var(--primary-color);
+      background-color: #fff;
+    }
+
+    &.invalid {
+      border-color: var(--danger-color);
+      box-shadow: 0 0 8px var(--danger-color);
+      background-color: #fff0f0;
+    }
+  }
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: var(--error-color);
+  margin-top: 0.3rem;
+}
+
+/* --- Buttons --- */
 .btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
+  padding: 0.6rem 1.3rem;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &.primary {
     background-color: var(--primary-color);
     color: white;
-    &:hover {
-      background-color: darken(#007bff, 10%);
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-hover);
     }
   }
 
   &.secondary {
     background-color: var(--secondary-color);
     color: white;
-    &:hover {
-      background-color: darken(#6c757d, 10%);
+    margin-right: 10px;
+
+    &:hover:not(:disabled) {
+      background-color: var(--secondary-hover);
     }
   }
 
   &.danger {
     background-color: var(--danger-color);
     color: white;
-    &:hover {
-      background-color: darken(#dc3545, 10%);
+
+    &:hover:not(:disabled) {
+      background-color: #d43a37;
     }
   }
-}
 
-// adding styles for disabled buttons
-// button.btn[disabled] {
-//   opacity: 0.6;
-//   cursor: not-allowed;
-//   pointer-events: none;
-// }
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Form styles */
-.form-group {
-  margin-bottom: 1rem;
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-
-  input {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-
-    &:focus {
-      outline: none;
-      border-color: #007bff;
-    }
-
-    &.invalid {
-      border-color: #dc3545;
-    }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
-.error-message {
-  color: var(--error-color);
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
-}
-
-/* Table styles */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-  th,
-  td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-
-  th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-  }
-
-  tr:hover {
-    background-color: #f8f9fa;
-  }
-}
-
-/* Card styles */
-.card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  margin: 1rem;
-}
-
-/* Header styles */
-.header {
-  background: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* --- Pagination --- */
+.pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  user-select: none;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  padding: 0.5rem;
 
-  .logo {
-    img {
-      height: 40px;
+  button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--card-bg);
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 3px 6px var(--shadow-color);
+    transition: all 0.3s ease;
+    text-align: center;
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 6px 12px rgba(92, 107, 192, 0.6);
+      transform: translateY(-2px);
     }
-  }
 
-  .nav-buttons {
-    display: flex;
-    gap: 1rem;
+    &:disabled {
+      background-color: #ddd;
+      color: #999;
+      border-color: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    &.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-hover);
+      box-shadow: 0 6px 12px rgba(92, 107, 192, 0.7);
+      transform: scale(1.05);
+    }
   }
 }
 
-/* Responsive styles */
+/* --- Responsive adjustments --- */
 @media (max-width: 768px) {
   .header {
     padding: 1rem;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
 
-    .nav-buttons {
-      gap: 0.5rem;
+    .nav-buttons button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
     }
-  }
-
-  .card {
-    padding: 15px;
-  }
-
-  .btn {
-    padding: 6px 12px;
-    font-size: 13px;
   }
 
   table {
-    th,
-    td {
-      padding: 8px;
-    }
+    font-size: 0.9rem;
+    min-width: unset;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+
+  .table-card {
+    padding: 8px 14 px;
+    overflow-y: hidden;
+    font-size: 0.9rem;
   }
 }
