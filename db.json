@@ -58,16 +58,16 @@
       ]
     },
     {
-      "id": "1746097588391",
-      "examName": "Roman ",
-      "examKey": "Rom123",
-      "phone": "234-234-2343",
+      "id": "1747652050460",
+      "examName": "Sanskrit",
+      "examKey": "San1234",
+      "phone": "341-234-3242",
       "examHours": 3,
       "examDetails": [
         {
-          "subject": "basics",
-          "marks": 5,
-          "no_of_questions": 4
+          "subject": "Basics",
+          "marks": 10,
+          "no_of_questions": 2
         }
       ]
     }
