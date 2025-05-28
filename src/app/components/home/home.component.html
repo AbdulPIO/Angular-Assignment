@@ -4,11 +4,11 @@
       <h2>Exam List</h2>
       <div class="search-box">
         <input
+          class="search-input"
           type="text"
           [(ngModel)]="searchTerm"
           (keyup)="applyFilterandPagination()"
           placeholder="Search exams..."
-          class="search-input"
         />
       </div>
     </div>
@@ -19,11 +19,12 @@
           <tr>
             <th (click)="onSort('examName')">
               Exam Name
+              <img src="sort.svg" alt="sorting logo" />
               {{
                 sortColumn === "examName"
                   ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
+                    ? ""
+                    : ""
                   : ""
               }}
             </th>
@@ -45,10 +46,10 @@
                 class="btn secondary"
                 (click)="onEdit(exam)"
               >
-                Edit
+                <img src="edit.svg" alt="edit logo" />
               </button>
               <button type="button" class="btn danger" (click)="onDelete(exam)">
-                Delete
+                <img src="delete.svg" alt="delete logo" />
               </button>
             </td>
           </tr>

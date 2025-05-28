@@ -7,3 +7,28 @@ th span {
   margin-left: 5px;
   font-size: 0.8rem;
 }
+
+.search-input {
+  width: 450px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    border-color: #5c6bc0;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #888;
+  }
+
+  @media (max-width: 768px) {
+    .search-input {
+      width: 200px;
+    }
+  }
+}
