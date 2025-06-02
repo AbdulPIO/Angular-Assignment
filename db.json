@@ -1,75 +1,124 @@
 {
-  "exams": [
+  "exams": [],
+  "projects": [
     {
-      "id": "1744693071906",
-      "examName": "Economics",
-      "examKey": "Eco1234",
-      "phone": "876-345-8762",
-      "examHours": 2,
-      "examDetails": [
-        {
-          "subject": "basics",
-          "marks": 5,
-          "no_of_questions": 5
-        }
-      ]
+      "id": "91e7",
+      "projectTitle": "Website Redesign"
     },
     {
-      "id": "1744695093013",
-      "examName": "Hindi",
-      "examKey": "Hin123",
-      "phone": "967-397-3847",
-      "examHours": 3,
-      "examDetails": []
+      "id": "b7c6",
+      "projectTitle": "Mobile App Launch"
     },
     {
-      "id": "1744695131745",
-      "examName": "Math",
-      "examKey": "Math123",
-      "phone": "123-456-7890",
-      "examHours": 2,
-      "examDetails": []
+      "id": "b0e2",
+      "projectTitle": "Marketing Campaign"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ebd3",
+      "title": "Local Deploy",
+      "dueDate": "06/12/25",
+      "status": "Pending",
+      "projectId": null
     },
     {
-      "id": "1744696982851",
-      "examName": "German",
-      "examKey": "Ger123",
-      "phone": "897-455-3543",
-      "examHours": 2,
-      "examDetails": []
+      "id": "c585",
+      "title": "A post",
+      "dueDate": "05/28/25",
+      "status": "Pending",
+      "projectId": null
     },
     {
-      "id": "1744698285918",
-      "examName": "Reasoning",
-      "examKey": "Rea1234",
-      "phone": "834-234-8734",
-      "examHours": 3,
-      "examDetails": [
-        {
-          "subject": "Aptitude",
-          "marks": 2,
-          "no_of_questions": 10
-        },
-        {
-          "subject": "Relation",
-          "marks": 3,
-          "no_of_questions": 10
-        }
-      ]
+      "title": "Create Setup",
+      "dueDate": "05/29/25",
+      "status": "In Progress",
+      "id": "87a0",
+      "projectId": null
     },
     {
-      "id": "1747652050460",
-      "examName": "Sanskrit",
-      "examKey": "San1234",
-      "phone": "341-234-3242",
-      "examHours": 3,
-      "examDetails": [
-        {
-          "subject": "Basics",
-          "marks": 10,
-          "no_of_questions": 2
-        }
-      ]
+      "id": "b3b2",
+      "title": "Backend Development",
+      "dueDate": "06/10/25",
+      "status": "Pending",
+      "projectId": null
+    },
+    {
+      "id": "d5d3",
+      "title": "Frontend Development",
+      "dueDate": "06/15/25",
+      "status": "Pending",
+      "projectId": null
+    },
+    {
+      "id": "c236",
+      "title": "Client Meeting",
+      "dueDate": "06/05/25",
+      "status": "Pending",
+      "projectId": null
+    },
+    {
+      "id": "920c",
+      "title": "Contract Finalizing",
+      "dueDate": "06/10/25",
+      "status": "Pending",
+      "projectId": null
+    },
+    {
+      "id": "4b8b",
+      "title": "Contract Finalizing",
+      "dueDate": "06/10/25",
+      "status": "Pending",
+      "projectId": null
+    },
+    {
+      "id": "2217",
+      "title": "Design new homepage",
+      "dueDate": "06/01/25",
+      "status": "Done",
+      "projectId": "91e7"
+    },
+    {
+      "id": "957a",
+      "title": "Update Color Scheme",
+      "dueDate": "06/01/25",
+      "status": "In Progress",
+      "projectId": "91e7"
+    },
+    {
+      "id": "4f9a",
+      "title": "Beta Testing",
+      "dueDate": "06/03/25",
+      "status": "Pending",
+      "projectId": "b7c6"
+    },
+    {
+      "id": "6776",
+      "title": "Create social media posts",
+      "dueDate": "05/25/25",
+      "status": "Done",
+      "projectId": "b0e2"
+    },
+    {
+      "id": "1140",
+      "title": "Email campaign setup",
+      "dueDate": "06/04/25",
+      "status": "In Progress",
+      "projectId": "b0e2"
+    },
+    {
+      "id": "df4f",
+      "title": "Analyze campaign results",
+      "dueDate": "06/12/25",
+      "status": "Pending",
+      "projectId": "b0e2"
+    },
+    {
+      "id": "d5b7",
+      "title": "Test",
+      "dueDate": "06/06/25",
+      "status": "In Progress",
+      "projectId": null
     }
   ]
 }

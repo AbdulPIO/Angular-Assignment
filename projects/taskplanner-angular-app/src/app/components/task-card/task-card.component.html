@@ -1,0 +1,43 @@
+<div class="task-card" [class.expanded]="isExpanded" appOverdue [task]="task">
+  <div class="task-header" (click)="toggleExpand()">
+    <div class="task-title">
+      <h3>{{ task.title }}</h3>
+      <span
+        class="status-badge"
+        [class]="task.status.toLowerCase().replace(' ', '-')"
+      >
+        {{ task.status }}
+      </span>
+    </div>
+    <div class="task-actions">
+      <button
+        class="btn-icon"
+        (click)="edit.emit(task); $event.stopPropagation()"
+      >
+        ✏️
+      </button>
+      <button
+        class="btn-icon delete"
+        (click)="delete.emit(task.id); $event.stopPropagation()"
+      >
+        🗑️
+      </button>
+      <button
+        class="btn-icon"
+        (click)="toggleExpand(); $event.stopPropagation()"
+      >
+        {{ isExpanded ? "▼" : "▶" }}
+      </button>
+    </div>
+  </div>
+  <div class="task-details" *ngIf="isExpanded">
+    <div class="detail-item">
+      <span class="label">Due Date:</span>
+      <span class="value">{{ task.dueDate }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Status:</span>
+      <span class="value">{{ task.status }}</span>
+    </div>
+  </div>
+</div>

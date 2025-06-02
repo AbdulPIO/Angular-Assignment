@@ -1,0 +1,64 @@
+<div class="modal-overlay" (click)="onBackdropClick()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ task ? "Edit Task" : "New Task" }}</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Task Title<span style="color: red">*</span></label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          placeholder="Enter Task Title"
+        />
+        <div
+          class="error"
+          *ngIf="taskForm.get('title')?.errors?.['required'] && taskForm.get('title')?.touched"
+        >
+          Task Title is required!
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">
+          Due Date (mm/dd/yy)<span style="color: red">*</span></label
+        >
+        <input
+          type="date"
+          id="dueDate"
+          formControlName="dueDate"
+          (change)="onDatechange($event)"
+        />
+        <div
+          class="error"
+          *ngIf="taskForm.get('dueDate')?.errors?.['required'] && taskForm.get('dueDate')?.touched"
+        >
+          Due date is required!
+        </div>
+        <div
+          class="error"
+          *ngIf="taskForm.get('dueDate')?.errors?.['pattern'] && taskForm.get('dueDate')?.touched"
+        >
+          Please enter date in mm/dd/yy format
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn-secondary" (click)="onCloseClick()">
+          Cancel
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="taskForm.invalid">
+          {{ task ? "Update" : "Create" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
