@@ -1,0 +1,53 @@
+<div class="project-card" [class.expanded]="isExpanded">
+  <div class="project-header" (click)="toggleExpand()">
+    <h3>{{ project.projectTitle }}</h3>
+    <div class="project-actions">
+      <button class="btn-icon" (click)="showTaskForm()">Add Task</button>
+      <button class="btn-icon" (click)="editProject()">Edit</button>
+      <button class="btn-icon" (click)="deleteProject()">Delete</button>
+      <button
+        class="btn-icon"
+        (click)="toggleExpand(); $event.stopPropagation()"
+      >
+        {{ isExpanded ? "▼" : "▶" }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isExpanded">
+    <div class="filter-container">
+      <select [(ngModel)]="selectedStatus">
+        <option value="All">All Tasks</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Done">Done</option>
+      </select>
+    </div>
+
+    <div class="tasks-container">
+      <div
+        *ngIf="(tasks | taskStatusFilter : selectedStatus).length === 0"
+        class="no-tasks"
+      >
+        {{
+          tasks.length === 0
+            ? "No tasks yet. Add a task to get started!"
+            : "No tasks match the selected filter."
+        }}
+      </div>
+      <app-task-card
+        *ngFor="let task of tasks | taskStatusFilter : selectedStatus"
+        [task]="task"
+        (edit)="editTask($event)"
+        (delete)="deleteTask($event)"
+      ></app-task-card>
+    </div>
+  </div>
+
+  <app-task-form-modal
+    *ngIf="showTaskModal"
+    [task]="selectedTask"
+    (save)="saveTask($event)"
+    (closeModal)="closeTaskModal()"
+  ></app-task-form-modal>
+</div>
